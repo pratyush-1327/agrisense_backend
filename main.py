@@ -45,6 +45,12 @@ def preprocess_image(image_bytes):
     img_array = np.expand_dims(img_array, axis=0).astype(np.float32)
     return tf.constant(img_array)
 
+
+@app.get("/ping")
+async def ping():
+    return {"message": "pong"}
+
+
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     image_bytes = await file.read()
